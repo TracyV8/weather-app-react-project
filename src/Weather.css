@@ -31,6 +31,7 @@
   width: 64px;
   margin-right: 15px;
 }
+
 .Weather .temperature {
   font-size: 64px;
   font-weight: 400;
@@ -44,5 +45,4 @@
   position: relative;
   line-height: 1;
   top: -34px;
-  margin-left: 5px;
 }
