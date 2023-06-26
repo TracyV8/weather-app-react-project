@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Weather.css";
+import FormatDate from "./FormatDate";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
@@ -16,7 +17,7 @@ export default function Weather() {
       wind: response.data.wind.speed,
       pressure: response.data.main.pressure,
       iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
-      date: "Wednesday 07:00",
+      date: new Date(response.data.dt * 1000),
     });
   }
   if (weatherData.ready) {
@@ -43,7 +44,10 @@ export default function Weather() {
         </form>
         <h1>{weatherData.city}</h1>
         <ul>
-          <li> {weatherData.date}</li>
+          <li>
+            {" "}
+            <FormatDate date={weatherData.date} />
+          </li>
           <li className="text-capitalize"> {weatherData.description}</li>
         </ul>
         <div className="row mt-3">
