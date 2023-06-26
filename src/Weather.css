@@ -27,9 +27,10 @@
   list-style: none;
 }
 .Weather img {
-  height: 64px;
+  height: 100px;
   width: 64px;
   margin-right: 15px;
+  margin-bottom: 30px;
 }
 
 .Weather .temperature {
