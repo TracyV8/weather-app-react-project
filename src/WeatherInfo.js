@@ -15,11 +15,7 @@ export default function WeatherInfo(props) {
       </ul>
       <div className="row mt-3">
         <div className="col-2">
-          <img
-            src={props.info.iconUrl}
-            alt={props.info.description}
-            className="float-left"
-          />
+          <img src={props.info.iconUrl} alt={props.info.description} />
         </div>
         <div className="col-4">
           <WeatherTemperature celsius={props.info.temperature} />
