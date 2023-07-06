@@ -14,23 +14,23 @@ export default function Weather(props) {
     setWeatherData({
       ready: true,
       coordinates: response.coord,
-      temperature: response.data.main.temp,
-      city: response.data.name,
-      humidity: response.data.main.humidity,
-      description: response.data.weather[0].description,
+      temperature: response.data.temperature.current,
+      city: response.data.city,
+      humidity: response.data.temperature.humidity,
+      description: response.data.condition.description,
       wind: response.data.wind.speed,
-      pressure: response.data.main.pressure,
-      iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-      date: new Date(response.data.dt * 1000),
+      pressure: response.data.temperature.pressure,
+      iconUrl: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
+      date: new Date(response.data.time * 1000),
     });
   }
 
   function search() {
-    let apiKey = "082d3d02ffdb12f2fd9b259e2ced1d0d";
+    //let apiKey = "f5f0a9eb4490812b8cb30o193ft06985";
 
-    let units = "metric";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}`;
-    axios.get(`${apiUrl}&appid=${apiKey}`).then(handleResponse);
+    //let units = "metric";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=f5f0a9eb4490812b8cb30o193ft06985&units=metric`;
+    axios.get(`${apiUrl}`).then(handleResponse);
   }
 
   function handleSubmit(event) {
@@ -66,7 +66,7 @@ export default function Weather(props) {
           </div>
         </form>
         <WeatherInfo info={weatherData} />
-        <ForecastData city={weatherData.city} />
+        <ForecastData info={weatherData} />
       </div>
     );
   } else {
