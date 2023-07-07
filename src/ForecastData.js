@@ -1,50 +1,38 @@
 import React, { useState } from "react";
 import "./ForecastData.css";
 import axios from "axios";
+import ForecastDay from "./ForecastDay";
 
 export default function ForecastData(props) {
   let [loaded, setLoaded] = useState(false);
   let [forecast, setForecast] = useState(null);
+  //console.log(props);
   function handleResponse(response) {
-    console.log(response.data);
+    //console.log(response.data);
     setForecast(response.data.daily);
     setLoaded(true);
   }
-  //console.log(props);
 
   if (loaded) {
-    console.log(forecast);
+    //console.log(forecast);
     return (
       <div className="ForecastData">
         <div className="row">
           <div className="col">
-            <div className="ForecastData-day">{forecast[0].time}</div>
-            <img
-              src={forecast[0].condition.icon_url}
-              alt={forecast[0].condition.description}
-              sizes="16"
-            />
-            <div className="ForecastData-temperature">
-              <span className="ForecastData-max">
-                {Math.round(forecast[0].temperature.maximum)}°
-              </span>
-              <span className="ForecastData-min">
-                {Math.round(forecast[0].temperature.minimum)}°
-              </span>
-            </div>
+            <ForecastDay data={forecast[0]} />
           </div>
         </div>
       </div>
     );
   } else {
-    //let apiKey = "082d3d02ffdb12f2fd9b259e2ced1d0d";
-    let city = props.info.city;
-    console.log(city);
+    let apiKey = "f5f0a9eb4490812b8cb30o193ft06985";
+    //let city = props.city.city;
+    //console.log(city);
 
-    // let longitude = props.coordinates.lon;
-    // let latitude = props.coordinates.lat;
-    //let units = "metric";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=f5f0a9eb4490812b8cb30o193ft06985&units=metric`;
+    let longitude = props.coordinates.longitude;
+    let latitude = props.coordinates.latitude;
+
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=metric`;
     axios.get(`${apiUrl}`).then(handleResponse);
 
     return null;

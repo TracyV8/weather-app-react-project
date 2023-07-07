@@ -10,10 +10,9 @@ export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
-    console.log(response.data);
+    //console.log(response.data);
     setWeatherData({
       ready: true,
-      coordinates: response.coord,
       temperature: response.data.temperature.current,
       city: response.data.city,
       humidity: response.data.temperature.humidity,
@@ -22,6 +21,7 @@ export default function Weather(props) {
       pressure: response.data.temperature.pressure,
       iconUrl: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
       date: new Date(response.data.time * 1000),
+      coordinates: response.data.coordinates,
     });
   }
 
@@ -66,7 +66,7 @@ export default function Weather(props) {
           </div>
         </form>
         <WeatherInfo info={weatherData} />
-        <ForecastData info={weatherData} />
+        <ForecastData coordinates={weatherData.coordinates} />
       </div>
     );
   } else {
