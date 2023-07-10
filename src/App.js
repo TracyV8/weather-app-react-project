@@ -16,6 +16,7 @@ export default function App() {
           <a
             href="https://github.com/TracyV8/weather-app-react-project"
             target="-blank"
+            rel="noopener noreferrer"
           >
             {" "}
             open sourced on Github
